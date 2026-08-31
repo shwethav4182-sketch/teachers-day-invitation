@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teachers' Day Mystery Invitation</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Georgia, serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #111827, #312e81, #7c2d12);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 650px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 25px;
+        padding: 35px 25px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .screen {
+        display: none;
+        animation: fade 0.7s ease;
+    }
+
+    .active {
+        display: block;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h1 {
+        font-size: 38px;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin: 15px 0;
+    }
+
+    .emoji {
+        font-size: 55px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        border: none;
+        padding: 14px 28px;
+        margin-top: 20px;
+        border-radius: 30px;
+        background: #fbbf24;
+        color: #111827;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.06);
+        background: #fde68a;
+    }
+
+    input {
+        width: 90%;
+        max-width: 400px;
+        padding: 14px;
+        margin-top: 15px;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        text-align: center;
+        font-size: 17px;
+    }
+
+    .hint {
+        color: #fde68a;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+    .hidden-message {
+        font-size: 25px;
+        letter-spacing: 4px;
+        color: #fde68a;
+        margin: 25px 0;
+        font-weight: bold;
+    }
+
+    .invitation {
+        border: 2px solid #fbbf24;
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 20px;
+        background: rgba(0,0,0,0.2);
+    }
+
+    .invitation h3 {
+        font-size: 30px;
+        color: #fbbf24;
+        margin-bottom: 15px;
+    }
+
+    .celebrate {
+        font-size: 50px;
+        margin: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- START -->
+    <div id="start" class="screen active">
+
+        <div class="emoji">🔐</div>
+
+        <h1>A Special Mystery Awaits...</h1>
+
+        <p>
+            Dear Teacher,<br>
+            your Teachers' Day invitation is not an ordinary one.
+        </p>
+
+        <p>
+            Complete the little mystery and unlock your surprise!
+        </p>
+
+        <button onclick="showScreen('clue')">
+            START THE MYSTERY
+        </button>
+
+    </div>
+
+
+    <!-- CLUE -->
+    <div id="clue" class="screen">
+
+        <div class="emoji">🔍</div>
+
+        <h2>Stage 1: Solve the Clue</h2>
+
+        <p>
+            I enter your classroom every day,<br>
+            I help your knowledge find its way.<br>
+            I have no voice, yet lessons I bring.<br>
+            What am I?
+        </p>
+
+        <input
+            type="text"
+            id="answer"
+            placeholder="Enter your answer"
+        >
+
+        <br>
+
+        <button onclick="checkAnswer()">
+            SUBMIT
+        </button>
+
+        <p id="clueMessage"></p>
+
+        <p class="hint">
+            Hint: You probably see one every day in college. 😉
+        </p>
+
+    </div>
+
+
+    <!-- HIDDEN MESSAGE -->
+    <div id="message" class="screen">
+
+        <div class="emoji">✨</div>
+
+        <h2>Stage 2: You Found It!</h2>
+
+        <p>
+            Excellent! But there is one more secret...
+        </p>
+
+        <p>
+            The hidden message is:
+        </p>
+
+        <div class="hidden-message">
+            YOU MAKE LEARNING SPECIAL
+        </div>
+
+        <p>
+            Now use this secret phrase to unlock the final invitation.
+        </p>
+
+        <button onclick="showScreen('unlock')">
+            CONTINUE 🔓
+        </button>
+
+    </div>
+
+
+    <!-- UNLOCK -->
+    <div id="unlock" class="screen">
+
+        <div class="emoji">🔑</div>
+
+        <h2>Stage 3: Unlock the Invitation</h2>
+
+        <p>
+            Enter the secret message you discovered.
+        </p>
+
+        <input
+            type="text"
+            id="secret"
+            placeholder="Enter secret message"
+        >
+
+        <br>
+
+        <button onclick="unlockInvitation()">
+            UNLOCK 💌
+        </button>
+
+        <p id="unlockMessage"></p>
+
+    </div>
+
+
+    <!-- FINAL INVITATION -->
+    <div id="invitation" class="screen">
+
+        <div class="celebrate">🎉🌸🎓🌸🎉</div>
+
+        <h2>You Unlocked It!</h2>
+
+        <div class="invitation">
+
+            <h3>Happy Teachers' Day!</h3>
+
+            <p>
+                Dear <strong id="teacherName">
+                YOUR TEACHER'S NAME
+                </strong>,
+            </p>
+
+            <p>
+                Behind every successful student,
+                there is a teacher who believed,
+                guided and inspired.
+            </p>
+
+            <p>
+                With immense love and gratitude,
+                we invite you to join us for a
+                special Teachers' Day celebration.
+            </p>
+
+            <p>
+                📅 <strong>5th September</strong><br>
+                📍 <strong>Our College</strong><br>
+                ⏰ <strong>Special Celebration</strong>
+            </p>
+
+            <p>
+                Your presence will make our celebration
+                truly special. ❤️
+            </p>
+
+            <div class="celebrate">
+                🌷✨📚✨🌷
+            </div>
+
+            <p>
+                With love,<br>
+                <strong>Your Students</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function showScreen(screenID) {
+
+    let screens = document.querySelectorAll(".screen");
+
+    screens.forEach(function(screen) {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(screenID).classList.add("active");
+}
+
+
+// CHECK FIRST CLUE
+
+function checkAnswer() {
+
+    let answer = document
+        .getElementById("answer")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if (
+        answer === "teacher" ||
+        answer === "teacher's" ||
+        answer === "teacher’s"
+    ) {
+
+        showScreen("message");
+
+    } else {
+
+        document.getElementById("clueMessage").innerHTML =
+            "❌ Not quite! Try again. Think about who guides your learning.";
+
+    }
+}
+
+
+// UNLOCK FINAL INVITATION
+
+function unlockInvitation() {
+
+    let secret = document
+        .getElementById("secret")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if (secret === "you make learning special") {
+
+        showScreen("invitation");
+
+    } else {
+
+        document.getElementById("unlockMessage").innerHTML =
+            "🔐 Almost! Enter the hidden message exactly.";
+    }
+}
+
+</script>
+
+</body>
+  </html>
